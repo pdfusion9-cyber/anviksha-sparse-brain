@@ -1,0 +1,20 @@
+{
+  "dataset": {"source": "wikimedia/wikipedia 20231101.hi", "chars": 1500000, "level": "character", "vocab": 369},
+  "architecture": {"unchanged": ["embeddings", "attention", "layer_norm", "residual", "head"],
+                   "replaced": "feed_forward"},
+  "node_field": {"nodes": 8, "active_per_token": 2, "node_hidden": "dim/2",
+                 "routing": "linear router, top-k", "interconnect": "one message round among co-active nodes"},
+  "measured": {
+    "dim96_layers3_150steps": {
+      "dense": {"loss": 3.1441, "ppl": 23.20, "seconds": 29.2, "parameters": 418848},
+      "sparse": {"loss": 3.2204, "ppl": 25.04, "seconds": 34.3, "parameters": 448224}
+    },
+    "dim192_layers2_60steps": {
+      "dense": {"loss": 3.2491, "ppl": 25.77, "seconds": 15.9},
+      "sparse": {"loss": 3.3410, "ppl": 28.25, "seconds": 15.8}
+    },
+    "ffn_compute_ratio": 0.25,
+    "node_load_layer0": [0.097, 0.138, 0.067, 0.146, 0.211, 0.152, 0.088, 0.101],
+    "gather_variant_slower_by": "6.5x"
+  }
+}
